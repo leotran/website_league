@@ -1,0 +1,22 @@
+.league-btn {
+	margin-right: 10px;
+}
+.league-caption {
+	background: #02024d;
+	color: #fff;
+	padding: 11px 0;
+	font-size: 1.3em;
+}
+.league-table-footer {
+	font-size: 1.4rem;
+	color: #666;
+	text-align: left;
+	overflow: visible;
+}
+.league-table-footer .header {
+	font-size: 1.5rem;
+	color: #666;
+	text-align: left;
+	overflow: visible;
+	font-weight: bold;
+}

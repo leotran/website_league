@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_league_season_public,league.season.public,league.model_season,base.group_public,1,0,0,0
+access_league_league_public,league.league.public,league.model_league,base.group_public,1,0,0,0
+access_league_league_season_team_public,league.season.team.public,league.model_league_season_team,base.group_public,1,0,0,0

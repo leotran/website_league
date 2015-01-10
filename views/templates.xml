@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<openerp>
+	<data>
+
+		<template id="assets_frontend" inherit_id="website.assets_frontend"
+			name="website_forum assets">
+			<xpath expr="." position="inside">
+				<link rel='stylesheet' href='/website_league/static/src/css/website_league.css' />
+			</xpath>
+		</template>
+
+		<template id="tables" name="Tables">
+			<div t-att-class="'col-md-6' if not league else ('col-md-9' if premier_league else '')"
+				 t-if="premier_league or not league" >
+				<table class="table table-striped">
+					<caption class="league-caption">Barclays Premier League 2014/15</caption>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Team</th>
+							<th>PL</th>
+							<th>W</th>
+							<th>D</th>
+							<th>L</th>
+							<th>F</th>
+							<th>A</th>
+							<th>GD</th>
+							<th>Pts</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr t-foreach="premier_league" t-as="pl">
+							<th>
+								<span t-esc="pl.rank" />
+							</th>
+							<td>
+								<span t-esc="pl.name" />
+							</td>
+							<td>
+								<span t-esc="pl.participate" />
+							</td>
+							<td>
+								<span t-esc="pl.win" />
+							</td>
+							<td>
+								<span t-esc="pl.draw" />
+							</td>
+							<td>
+								<span t-esc="pl.loss" />
+							</td>
+							<td>
+								<span t-esc="pl.goal_for" />
+							</td>
+							<td>
+								<span t-esc="pl.goal_against" />
+							</td>
+							<td>
+								<span t-esc="pl.goal_defference" />
+							</td>
+							<td>
+								<span t-esc="pl.point" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div t-att-class="'col-md-6' if not league else ('col-md-9' if liga else 'hidden')"
+				 t-if="liga or not league">
+				<table class="table table-striped">
+					<caption class="league-caption">Spanish Primera BBVA 2014/15</caption>
+					<thead>
+						<tr>
+							<th>#</th>
+							<th>Team</th>
+							<th>PL</th>
+							<th>W</th>
+							<th>D</th>
+							<th>L</th>
+							<th>F</th>
+							<th>A</th>
+							<th>GD</th>
+							<th>Pts</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr t-foreach="liga" t-as="lg">
+							<th>
+								<span t-esc="lg.rank" />
+							</th>
+							<td>
+								<span t-esc="lg.name" />
+							</td>
+							<td>
+								<span t-esc="lg.participate" />
+							</td>
+							<td>
+								<span t-esc="lg.win" />
+							</td>
+							<td>
+								<span t-esc="lg.draw" />
+							</td>
+							<td>
+								<span t-esc="lg.loss" />
+							</td>
+							<td>
+								<span t-esc="lg.goal_for" />
+							</td>
+							<td>
+								<span t-esc="lg.goal_against" />
+							</td>
+							<td>
+								<span t-esc="lg.goal_defference" />
+							</td>
+							<td>
+								<span t-esc="lg.point" />
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</template>
+		
+		<template id="index" name="League Tables">
+			<t t-call="website.layout">
+				<t t-set="additional_title">Football Tables</t>
+				<div class="oe_structure" />
+				<div class="container mt16 mb16">
+					<div class="navbar navbar-default">
+						<div class="navbar-header">
+							<button type="button" class="navbar-toggle" data-toggle="collapse"
+								data-target="#oe-help-navbar-collapse">
+								<span class="sr-only">Toggle navigation</span>
+								<span class="icon-bar"></span>
+								<!-- <span class="icon-bar"></span> -->
+								<span class="icon-bar"></span>
+							</button>
+							<a class="navbar-brand" t-attf-href="/table/#">
+								Competitions
+							</a>
+						</div>
+						<div class="collapse navbar-collapse">
+							<div class="dropdown navbar-right">
+								<button class="btn btn-default dropdown-toggle navbar-btn"
+									type="button" id="dropdownCompetition" data-toggle="dropdown"
+									aria-expanded="true">
+									<span t-esc="league.name if league else 'Select a competition'" />
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownCompetition">
+									<li t-foreach="leagues" t-as="l" role="presentation">
+										<a role="menuitem" tabindex="-1"
+											t-attf-href="/table/competition/#{ slug(l) }#{ '/season/%s' % slug(season) if season else '' }"
+											t-esc="l.name" />
+									</li>
+								</ul>
+							</div>
+							<div class="dropdown navbar-right">
+								<button class="btn btn-default dropdown-toggle navbar-btn league-btn"
+									type="button" id="dropdownSeason" data-toggle="dropdown"
+									aria-expanded="true">
+									<span t-esc="season.name if season else 'Select a season'" />
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu" role="menu" aria-labelledby="dropdownSeason">
+									<li t-foreach="seasons" t-as="s" role="presentation">
+										<a role="menuitem" tabindex="-1"
+											t-attf-href="/table#{ '/competition/%s' % slug(league) if league else '' }/season/#{ slug(s) }"
+											t-esc="s.name" />
+									</li>
+								</ul>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<t t-call="website_league.tables"/>
+					</div>
+					<div class="row" t-if="premier_league or liga">
+						<div class="col-md-12 league-table-footer">
+							<h5 class="header">Key</h5>
+							Uefa Champions League: 1st, 2nd, 3rd, 4th
+							<br />
+							Europa League: 5th
+							<br />
+							Relegation: 18th, 19th, 20th
+							<br />
+						</div>
+					</div>
+				</div>
+				<div class="oe_structure" />
+			</t>
+		</template>
+
+	</data>
+</openerp>
