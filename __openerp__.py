@@ -26,7 +26,7 @@
     'website': 'http://openerpdev.com',
     'summary': 'Public Leagues to Website',    
     'category': 'Website',
-    'sequence': 2,    
+    'sequence': 1,    
     'description':"""
 Public Leagues to Website
 =========================
